@@ -1,0 +1,26 @@
+builders:
+  builders:
+    import: "package:build_runner_issue/builders.dart"
+    builder_factories:
+      - builderA
+      - builderB
+      - builderC
+    build_extensions:
+      .dart:
+        - .a1
+        - .b1
+        - .c1
+    is_optional: True
+    auto_apply: all_packages
+    required_inputs: [".dart"]
+  builderD:
+    import: "package:build_runner_issue/builders.dart"
+    builder_factories:
+      - builderD
+    build_extensions:
+      .dart:
+        - .txt
+    is_optional: False
+    auto_apply: root_package
+    required_inputs: [".dart", ".c1"]
+    applies_builders: ["|builderC"]

@@ -26,7 +26,11 @@ class BuilderA implements Builder {
 class BuilderB implements Builder {
   @override
   Future build(BuildStep buildStep) async {
-    await buildStep.writeAsString(buildStep.inputId.changeExtension('.b1'), '');
+    final assetA = buildStep.inputId.changeExtension('.a1');
+    if (await buildStep.canRead(assetA)) {
+      await buildStep.writeAsString(
+          buildStep.inputId.changeExtension('.b1'), '');
+    }
   }
 
   @override
